@@ -9,7 +9,8 @@ export default class Table extends React.Component {
 
         this.state = {
             checked: new Set(),
-            rows: props.rows
+            rows: props.rows,
+            profile: props.profile
         };
     };
 
@@ -75,8 +76,13 @@ export default class Table extends React.Component {
 
     onAddRow() {
         this.state.rows.push({
-            hash: this.makeUniqueId(),
-            type: TableRow.TYPE_TEXT
+            id: null,
+            type: TableRow.TYPE_TEXT,
+            hash: 'hash-' + Math.random().toString(36).substr(2, 16),
+            label: '',
+            isRequired: false,
+            value: '',
+            defaultValue: []
         });
 
         this.setState({rows: this.state.rows});
@@ -105,13 +111,14 @@ export default class Table extends React.Component {
         $.ajax({
             type: 'POST',
             data: $(event.target).serialize(),
-            url: '/profile/'
+            url: '/profile/save/'
         });
     }
 
     render() {
         return (
             <form onSubmit={this.onSubmit.bind(this)}>
+                <input type="hidden" name="id" value={this.state.profile.id} />
                 <table id="table" className="table table-bordered">
                     <thead>
                     <tr>
@@ -120,7 +127,7 @@ export default class Table extends React.Component {
                                 <div className="form-group head-inputs-1 col-xs-6">
                                     <label htmlFor="" className="col-sm-2 control-label">Название</label>
                                     <div className="col-sm-10">
-                                        <input type="email" className="form-control"/>
+                                        <input type="text" name="name" className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="form-group head-inputs-2 col-xs-6">

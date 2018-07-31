@@ -10,8 +10,6 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>$(name)</title>
-        <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -29,16 +27,40 @@
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
                 crossorigin="anonymous"></script>
     </head>
-
     <body>
         <div id="container" class="container">
-            <div id="loader" class="loader"></div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${profiles}" var="profile">
+                        <tr>
+                            <td></td>
+                            <td>${profile.getName()}</td>
+                            <td>
+                                <a href="/profile/edit/${profile.getId()}">Edit</a>
+                                /
+                                <a href="/profile/delete/${profile.getId()}">Delete</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
         </div>
-        </body>
-
-        <script src="/resources/js/bundles/bundle.js"></script>
-        <script>
-            app.run("${id}");
-        </script>
+        <c:if test="${not empty errorMessage}">
+            <div class="alert alert-error" role="alert">
+                ${errorMessage}
+            </div>
+        </c:if>
+        <c:if test="${not empty successMessage}">
+            <div class="alert alert-success" role="alert">
+                    ${successMessage}
+            </div>
+        </c:if>
     </body>
 </html>

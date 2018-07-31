@@ -114,6 +114,7 @@ export default class TableRow extends React.Component {
         return (
             <tr>
                 <td>
+                    <input type="hidden" value={this.state.id} name={'rows[' + this.props.number + '].id'} />
                     <FormGroup>
                         <Col sm={12}><Checkbox onClick={this.props.onCheckRow} /></Col>
                     </FormGroup>

@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.app1.example.*"})
-@EnableJpaRepositories(basePackages = "com.app1.example.*", entityManagerFactoryRef = "entityManagerFactory")
+@EnableJpaRepositories(basePackages = {"com.app1.example.Dao"}, entityManagerFactoryRef = "entityManagerFactory")
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Bean
