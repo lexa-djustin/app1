@@ -146,9 +146,6 @@ public class ProfileController {
 
         ModelAndView model = new ModelAndView("profile/delete");
 
-
-
-
         return model;
     }
 }
